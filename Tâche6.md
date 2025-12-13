@@ -1,10 +1,4 @@
-
-
----
-
-# 📌 Énoncé
-
-Définir une fonction **`addNumbers`** qui prend **deux entiers** et retourne **leur somme**, en utilisant **une signature de type**.
+# HC1T6 - Tâche 6 : Utilisation de signatures de type
 
 ---
 
