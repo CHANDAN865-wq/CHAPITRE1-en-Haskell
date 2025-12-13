@@ -1,0 +1,205 @@
+
+
+---
+
+# 📌 Énoncé reformulé
+
+On dispose d’une **liste de joueurs**, chaque joueur étant représenté par un **tuple** :
+
+```haskell
+(nom, score)
+```
+
+On doit :
+
+1. **extractPlayers** : extraire uniquement les noms des joueurs
+2. **sortByScore** : trier les joueurs par **score décroissant**
+3. **topThree** : retourner les **trois meilleurs joueurs**
+4. **getTopThreePlayers** : composer les fonctions précédentes
+
+---
+
+# 🧠 Rappels Haskell importants
+
+* Un **tuple** : `(nom, score)`
+* Une **liste** : `[(String, Int)]`
+* `map` : applique une fonction à chaque élément
+* `sortBy` : trie une liste avec un critère
+* `take n` : prend les `n` premiers éléments
+* `(.)` : **composition de fonctions**
+
+---
+
+# ✅ Solution complète en Haskell
+
+```haskell
+import Data.List (sortBy)
+import Data.Ord (comparing)
+
+-- 1️⃣ Extraire les noms des joueurs
+extractPlayers :: [(String, Int)] -> [String]
+extractPlayers joueurs = map fst joueurs
+
+-- 2️⃣ Trier les joueurs par score décroissant
+sortByScore :: [(String, Int)] -> [(String, Int)]
+sortByScore joueurs = sortBy (flip (comparing snd)) joueurs
+
+-- 3️⃣ Prendre les trois meilleurs joueurs
+topThree :: [(String, Int)] -> [(String, Int)]
+topThree joueurs = take 3 joueurs
+
+-- 4️⃣ Composition des fonctions
+getTopThreePlayers :: [(String, Int)] -> [String]
+getTopThreePlayers =
+    extractPlayers . topThree . sortByScore
+
+-- Fonction principale
+main :: IO ()
+main = do
+    let joueurs =
+            [ ("Ali", 15)
+            , ("Binta", 25)
+            , ("Charles", 18)
+            , ("Dina", 30)
+            , ("Eric", 22)
+            ]
+
+    putStrLn "Les trois meilleurs joueurs sont :"
+    print (getTopThreePlayers joueurs)
+```
+
+---
+
+# 🧾 Explication détaillée (correction)
+
+---
+
+## 1️⃣ Fonction `extractPlayers`
+
+```haskell
+extractPlayers :: [(String, Int)] -> [String]
+extractPlayers joueurs = map fst joueurs
+```
+
+### 🔍 Explication
+
+* Entrée : liste de tuples `(nom, score)`
+* `fst` récupère le **premier élément du tuple**
+* `map fst` applique `fst` à chaque joueur
+* Résultat : liste des **noms uniquement**
+
+📌 Exemple :
+
+```haskell
+[("Ali",15),("Binta",25)] → ["Ali","Binta"]
+```
+
+---
+
+## 2️⃣ Fonction `sortByScore`
+
+```haskell
+sortByScore :: [(String, Int)] -> [(String, Int)]
+sortByScore joueurs = sortBy (flip (comparing snd)) joueurs
+```
+
+### 🔍 Explication
+
+* `snd` récupère le **score**
+* `comparing snd` compare les scores
+* `flip` inverse l’ordre pour avoir un **tri décroissant**
+* `sortBy` effectue le tri
+
+📌 Résultat : du **meilleur score au plus faible**
+
+---
+
+## 3️⃣ Fonction `topThree`
+
+```haskell
+topThree :: [(String, Int)] -> [(String, Int)]
+topThree joueurs = take 3 joueurs
+```
+
+### 🔍 Explication
+
+* `take 3` prend les **trois premiers éléments**
+* On suppose que la liste est déjà triée
+
+---
+
+## 4️⃣ Fonction composée `getTopThreePlayers`
+
+```haskell
+getTopThreePlayers :: [(String, Int)] -> [String]
+getTopThreePlayers =
+    extractPlayers . topThree . sortByScore
+```
+
+### 🔍 Explication (point clé de l’exercice)
+
+La composition se lit **de droite à gauche** :
+
+1. `sortByScore` → trie les joueurs
+2. `topThree` → garde les 3 meilleurs
+3. `extractPlayers` → extrait les noms
+
+📌 Écriture équivalente (non composée) :
+
+```haskell
+getTopThreePlayers joueurs =
+    extractPlayers (topThree (sortByScore joueurs))
+```
+
+---
+
+## 5️⃣ Fonction `main`
+
+```haskell
+main :: IO ()
+main = do
+```
+
+* Point d’entrée du programme
+* Permet l’affichage
+
+---
+
+## 6️⃣ Données de test
+
+```haskell
+let joueurs =
+    [ ("Ali", 15)
+    , ("Binta", 25)
+    , ("Charles", 18)
+    , ("Dina", 30)
+    , ("Eric", 22)
+    ]
+```
+
+---
+
+## 7️⃣ Affichage du résultat
+
+```haskell
+print (getTopThreePlayers joueurs)
+```
+
+### 📤 Résultat affiché :
+
+```text
+["Dina","Binta","Eric"]
+```
+
+---
+
+# ✅ Ce que le correcteur attend
+
+✔️ Utilisation correcte des tuples
+✔️ Tri décroissant
+✔️ Bonne extraction des noms
+✔️ Bonne **composition de fonctions**
+✔️ Présence de `main`
+
+---
+
