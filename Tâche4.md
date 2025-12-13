@@ -1,7 +1,3 @@
-
-
----
-
 # 📌 Énoncé reformulé
 
 On dispose d’une **liste de joueurs**, chaque joueur étant représenté par un **tuple** :
