@@ -1,6 +1,6 @@
-# 📌 Énoncé reformulé
+HC1T4 - Tâche 4 : Composer une fonction pour traiter des données de joueurs
 
-On dispose d’une **liste de joueurs**, chaque joueur étant représenté par un **tuple** :
+---
 
 ```haskell
 (nom, score)
