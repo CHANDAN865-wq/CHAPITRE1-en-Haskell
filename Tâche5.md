@@ -1,10 +1,4 @@
-
-
----
-
-# 📌 Énoncé
-
-Créer une fonction **`infiniteNumbers`** qui génère une **liste infinie de nombres**, puis **extraire seulement les `n` premiers éléments**.
+HC1T5 - Tâche 5 : Paresse en Haskell
 
 ---
 
